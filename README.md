@@ -21,6 +21,11 @@ To set up the project locally, follow these steps:
    ```sh
    git clone https://github.com/yourusername/yourproject.git
    
+### Running the Flask Application
+To run the Flask application, use the following command:
+```sh
+python app.py
+   
 ## To create a Virtual environment
     python -m venv venv
 
