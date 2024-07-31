@@ -4,6 +4,9 @@ import logging
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 
+# Get the database URL from environment variables
+database_url = os.getenv('DATABASE_URL', 'example.db')  # Default to 'example.db' if not set
+
 def create_table():
     conn = sqlite3.connect('example.db')
     c = conn.cursor()
