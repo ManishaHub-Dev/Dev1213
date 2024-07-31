@@ -61,3 +61,26 @@ def initialize_database():
 if __name__ == "__main__":
     initialize_database()
     print("Database operations completed successfully.")
+
+# Commit the changes and close the connection
+    conn.commit()
+    conn.close()
+    logging.info("Database initialized successfully.")
+
+# Function to perform advanced queries
+def perform_advanced_queries():
+    # Connect to the database
+    conn = sqlite3.connect('example.db')
+    c = conn.cursor()
+
+    # Example of an advanced query: Get users with their roles
+    c.execute('''
+        SELECT users.username, roles.role_name
+        FROM users
+        JOIN user_roles ON users.id = user_roles.user_id
+        JOIN roles ON user_roles.role_id = roles.id
+    ''')
+    users_with_roles = c.fetchall()
+    for user in users_with_roles:
+        print(f"Username: {user[0]}, Role: {user[1]}")
+    logging.info("Performed advanced queries successfully.")
