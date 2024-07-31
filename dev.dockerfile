@@ -4,6 +4,11 @@ WORKDIR /app
 
 COPY . .
 
+# Install dependencies
+RUN pip install --upgrade pip
 RUN pip install sqlite3
+
+# Set environment variables
+ENV DATABASE_URL=example.db
 
 CMD ["python", "database_operations.py"]
