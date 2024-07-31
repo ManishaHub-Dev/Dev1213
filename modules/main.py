@@ -8,6 +8,7 @@ logging.basicConfig(level=logging.INFO)
 def main():
     create_table()
     add_user('Charlie', 28, 'charlie@example.com')
+    add_user('Allison', 31, 'Allison@example.com')
 
 if __name__ == "__main__":
     main()
