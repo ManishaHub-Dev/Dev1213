@@ -4,28 +4,25 @@ import logging
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 
-# Connect to the database (or create it)
-conn = sqlite3.connect('example.db')
-c = conn.cursor()
+def create_table():
+    conn = sqlite3.connect('example.db')
+    c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS users
+                 (id INTEGER PRIMARY KEY, name TEXT, age INTEGER, email TEXT)''')
+    logging.info("Created table 'users'")
+    conn.commit()
+    conn.close()
 
-# Create a table
-c.execute('''CREATE TABLE IF NOT EXISTS users
-             (id INTEGER PRIMARY KEY, name TEXT, age INTEGER)''')
-logging.info("Created table 'users'")
+def add_user(name, age, email):
+    conn = sqlite3.connect('example.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO users (name, age, email) VALUES (?, ?, ?)", (name, age, email))
+    logging.info(f"Inserted user {name}")
+    conn.commit()
+    conn.close()
 
-# Insert some records
-c.execute("INSERT INTO users (name, age) VALUES ('Drey', 28)")
-c.execute("INSERT INTO users (name, age) VALUES ('Allison', 31)")
-logging.info("Inserted records into 'users'")
-
-# Complex query
-c.execute("SELECT AVG(age) FROM users")
-avg_age = c.fetchone()[0]
-logging.info(f"Average age of users: {avg_age}")
-
-# Commit the changes and close the connection
-conn.commit()
-conn.close()
-
-logging.info("Database operations completed successfully.")
+if __name__ == "__main__":
+    create_table()
+    add_user('Drey', 28, 'charlie@example.com')
+    # More user operations can be added here
 
