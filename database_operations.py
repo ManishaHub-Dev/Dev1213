@@ -4,28 +4,28 @@ import logging
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 
-# Get the database URL from environment variables
-database_url = os.getenv('DATABASE_URL', 'example.db')  # Default to 'example.db' if not set
-
-def create_table():
+# Function to create the database and tables
+def initialize_database():
+    # Connect to the database (or create it)
     conn = sqlite3.connect('example.db')
     c = conn.cursor()
-    c.execute('''CREATE TABLE IF NOT EXISTS users
-                 (id INTEGER PRIMARY KEY, name TEXT, age INTEGER, email TEXT)''')
+
+    # Create the 'users' table with username and password fields
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY,
+            username TEXT UNIQUE NOT NULL,
+            password TEXT NOT NULL
+        )
+    ''')
     logging.info("Created table 'users'")
+
+    # Commit the changes and close the connection
     conn.commit()
     conn.close()
+    logging.info("Database initialized successfully.")
 
-def add_user(name, age, email):
-    conn = sqlite3.connect('example.db')
-    c = conn.cursor()
-    c.execute("INSERT INTO users (name, age, email) VALUES (?, ?, ?)", (name, age, email))
-    logging.info(f"Inserted user {name}")
-    conn.commit()
-    conn.close()
-
+# Main execution
 if __name__ == "__main__":
-    create_table()
-    add_user('Drey', 28, 'charlie@example.com')
-    # More user operations can be added here
-
+    initialize_database()
+    print("Database operations completed successfully.")
