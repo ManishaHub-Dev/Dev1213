@@ -11,4 +11,4 @@ RUN pip install sqlite3
 # Set environment variables
 ENV DATABASE_URL=example.db
 
-CMD ["python", "database_operations.py"]
+CMD ["python", "main.py"]	
