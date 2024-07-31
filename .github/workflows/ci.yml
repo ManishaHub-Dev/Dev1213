@@ -19,3 +19,6 @@ jobs:
     - name: Run tests
       run: |
         python -m unittest discover
+    - name: Backup database
+      run: |
+        python backup_db.py
