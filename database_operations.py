@@ -20,6 +20,38 @@ def initialize_database():
     ''')
     logging.info("Created table 'users'")
 
+    # Create the 'profiles' table with a foreign key to the 'users' table
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS profiles (
+            id INTEGER PRIMARY KEY,
+            user_id INTEGER NOT NULL,
+            bio TEXT,
+            FOREIGN KEY (user_id) REFERENCES users (id)
+        )
+    ''')
+    logging.info("Created table 'profiles'")
+
+    # Create the 'roles' table
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS roles (
+            id INTEGER PRIMARY KEY,
+            role_name TEXT UNIQUE NOT NULL
+        )
+    ''')
+    logging.info("Created table 'roles'")
+
+    # Create the 'user_roles' table to associate users with roles
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS user_roles (
+            user_id INTEGER NOT NULL,
+            role_id INTEGER NOT NULL,
+            FOREIGN KEY (user_id) REFERENCES users (id),
+            FOREIGN KEY (role_id) REFERENCES roles (id),
+            PRIMARY KEY (user_id, role_id)
+        )
+    ''')
+    logging.info("Created table 'user_roles'")
+
     # Commit the changes and close the connection
     conn.commit()
     conn.close()
