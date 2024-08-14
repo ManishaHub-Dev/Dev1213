@@ -19,6 +19,13 @@ def check_employee(employee_id):
     cursor.execute(sql, (employee_id,))
     return cursor.rowcount == 1
 
+# Step 15: Function to validate salary
+def validate_salary(salary):
+    try:
+        return float(salary) > 0
+    except ValueError:
+        return False
+
 # Function to add an employee
 def add_employee():
     Id = input("Enter Employee Id: ")
@@ -29,6 +36,11 @@ def add_employee():
     Name = input("Enter Employee Name: ")
     Post = input("Enter Employee Post: ")
     Salary = input("Enter Employee Salary: ")
+
+    # Step 15: Validate the salary before proceeding
+    if not validate_salary(Salary):
+        print("Invalid salary. Please try again.")
+        return
 
     sql = 'INSERT INTO employees (id, name, position, salary) VALUES (%s, %s, %s, %s)'
     data = (Id, Name, Post, Salary)
