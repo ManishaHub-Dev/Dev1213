@@ -117,6 +117,22 @@ def update_employee():
         print(f"Error: {err}")
         con.rollback()
 
+# Function to search employees by salary range
+def search_by_salary():
+    min_salary = float(input("Enter minimum salary: "))
+    max_salary = float(input("Enter maximum salary: "))
+
+    sql = 'SELECT * FROM employees WHERE salary BETWEEN %s AND %s'
+    cursor.execute(sql, (min_salary, max_salary))
+    employees = cursor.fetchall()
+
+    for employee in employees:
+        print(f"Employee Id : {employee[0]}")
+        print(f"Employee Name : {employee[1]}")
+        print(f"Employee Post : {employee[2]}")
+        print(f"Employee Salary : {employee[3]}")
+        print("------------------------------------")
+
 # Function to display the menu
 def menu():
     while True:
@@ -127,8 +143,9 @@ def menu():
         print("3 to Promote Employee")
         print("4 to Display Employees")
         print("5 to Update Employee")
-        print("6 to Generate Employee Report")
-        print("7 to Exit")
+        print("6 to Search Employees by Salary Range")
+        print("7 to Generate Employee Report")
+        print("8 to Exit")
 
         choice = input("Enter your Choice: ")
 
@@ -143,9 +160,11 @@ def menu():
         elif choice == '5':
             update_employee()
         elif choice == '6':
+            search_by_salary()
+        elif choice == '7':
             generate_report(cursor, 'employee_report.csv')
             print("Report generated successfully")
-        elif choice == '7':
+        elif choice == '8':
             print("Exiting the program. Goodbye!")
             break
         else:
