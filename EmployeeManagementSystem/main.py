@@ -157,6 +157,18 @@ def award_incentive():
         print("Incentive awarded successfully")
     except mysql.connector.Error as err:
         print(f"Error: {err}")
+        con.rollback()  
+
+def remove_department():
+    id = input("Enter Department Id: ")
+
+    sql = 'DELETE FROM departments WHERE id=%s'
+    try:
+        cursor.execute(sql, (id,))
+        con.commit()
+        print("Department removed successfully")
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
         con.rollback()        
  
 # Function to search employees by salary range
