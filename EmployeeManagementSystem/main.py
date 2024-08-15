@@ -158,6 +158,17 @@ def award_incentive():
     except mysql.connector.Error as err:
         print(f"Error: {err}")
         con.rollback()        
+ 
+def view_departments():
+    sql = 'SELECT * FROM departments'
+    cursor.execute(sql)
+    departments = cursor.fetchall()
+
+    for department in departments:
+        print(f"Department Id: {department[0]}")
+        print(f"Department Name: {department[1]}")
+        print(f"Manager Id: {department[2]}")
+        print("------------------------------------")
 
 # Function to search employees by salary range
 def search_by_salary():
