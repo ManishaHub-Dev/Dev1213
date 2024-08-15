@@ -128,6 +128,21 @@ def update_employee():
     except mysql.connector.Error as err:
         print(f"Error: {err}")
         con.rollback()
+        
+def add_department():
+    id = input("Enter Department Id: ")
+    name = input("Enter Department Name: ")
+    manager_id = input("Enter Manager Id: ")
+
+    sql = 'INSERT INTO departments (id, name, manager_id) VALUES (%s, %s, %s)'
+    data = (id, name, manager_id)
+    try:
+        cursor.execute(sql, data)
+        con.commit()
+        print("Department added successfully")
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+        con.rollback()
 
 # Function to search employees by salary range
 def search_by_salary():
