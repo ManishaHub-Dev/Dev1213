@@ -143,6 +143,21 @@ def add_department():
     except mysql.connector.Error as err:
         print(f"Error: {err}")
         con.rollback()
+        
+def award_incentive():
+    employee_id = input("Enter Employee Id: ")
+    incentive_amount = input("Enter Incentive Amount: ")
+    date_awarded = input("Enter Date Awarded (YYYY-MM-DD): ")
+
+    sql = 'INSERT INTO incentives (employee_id, incentive_amount, date_awarded) VALUES (%s, %s, %s)'
+    data = (employee_id, incentive_amount, date_awarded)
+    try:
+        cursor.execute(sql, data)
+        con.commit()
+        print("Incentive awarded successfully")
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+        con.rollback()        
 
 # Function to search employees by salary range
 def search_by_salary():
