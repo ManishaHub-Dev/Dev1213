@@ -214,6 +214,7 @@ def menu():
         print("9 to Add Department")
         print("10 to Award Incentive")
         print("11 to View Departments")
+        print("12 to View Incentives")
 
         choice = input("Enter your Choice: ")
 
@@ -240,6 +241,8 @@ def menu():
             award_incentive()
         elif choice == '11':
             view_departments()
+        elif choice == '12':
+            view_incentives()
             break
         else:
             print("Invalid Choice! Please try again.")
