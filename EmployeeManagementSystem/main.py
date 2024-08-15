@@ -159,17 +159,6 @@ def award_incentive():
         print(f"Error: {err}")
         con.rollback()        
  
-def view_departments():
-    sql = 'SELECT * FROM departments'
-    cursor.execute(sql)
-    departments = cursor.fetchall()
-
-    for department in departments:
-        print(f"Department Id: {department[0]}")
-        print(f"Department Name: {department[1]}")
-        print(f"Manager Id: {department[2]}")
-        print("------------------------------------")
-
 # Function to search employees by salary range
 def search_by_salary():
     min_salary = float(input("Enter minimum salary: "))
@@ -184,6 +173,29 @@ def search_by_salary():
         print(f"Employee Name : {employee[1]}")
         print(f"Employee Post : {employee[2]}")
         print(f"Employee Salary : {employee[3]}")
+        print("------------------------------------")
+        
+def view_departments():
+    sql = 'SELECT * FROM departments'
+    cursor.execute(sql)
+    departments = cursor.fetchall()
+
+    for department in departments:
+        print(f"Department Id: {department[0]}")
+        print(f"Department Name: {department[1]}")
+        print(f"Manager Id: {department[2]}")
+        print("------------------------------------")
+        
+def view_incentives():
+    sql = 'SELECT * FROM incentives'
+    cursor.execute(sql)
+    incentives = cursor.fetchall()
+
+    for incentive in incentives:
+        print(f"Incentive Id: {incentive[0]}")
+        print(f"Employee Id: {incentive[1]}")
+        print(f"Incentive Amount: {incentive[2]}")
+        print(f"Date Awarded: {incentive[3]}")
         print("------------------------------------")
 
 # Function to display the menu
