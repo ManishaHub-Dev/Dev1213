@@ -187,8 +187,9 @@ def menu():
         print("5 to Update Employee")
         print("6 to Search Employees by Salary Range")
         print("7 to Generate Employee Report")
-        print("9 to Add Department")
         print("8 to Exit")
+        print("9 to Add Department")
+        print("10 to Award Incentive")
 
         choice = input("Enter your Choice: ")
 
@@ -211,6 +212,8 @@ def menu():
             print("Exiting the program. Goodbye!")
         elif choice == '9':
             add_department()
+        elif choice == '10':
+            award_incentive()
             break
         else:
             print("Invalid Choice! Please try again.")
